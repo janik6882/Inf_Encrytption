@@ -7,7 +7,7 @@ __license__ = "None"
 __version__ = "0.9"
 __maintainer__ = "Janik Klauenberg (https://github.com/janik6882)"
 __email__ = "support@klauenberg.eu"
-__status__ = "V0.1"
+__status__ = "V0.2"
 
 from Tkinter import *
 import sys
@@ -37,11 +37,11 @@ def encrypt(inp, num):
         int(num)
     except ValueError:
         print ("RTFM. Please read the manual")
-        return None
+        return "Fehler"
     inp = inp.lower()
     if not check_string(inp, allowed_chars):
         print ("RTFM. Please read the manual")
-        return None
+        return "Fehler"
     # validity checks ended, creating temporary vars for use in function
     pub = str()  # pub is the resulting string which will be returned
     temp = list()  # temporary List for storing the values of every char
@@ -53,8 +53,7 @@ def encrypt(inp, num):
             tempo += 26
         while tempo > 26:
             tempo -= 26
-        temp[i] = tempo
-        pub += crypt[temp[i]]
+        pub += crypt[tempo]
     return pub.upper()
 
 
@@ -86,10 +85,10 @@ def decrypt(inp, num):
 if __name__ == '__main__':
     # Set Gui to True if you want to use the Gui, set to False of not.
     # Startvars:
-    Gui = False
+    Gui = True
 
-    def get_e1_val():
-        Label(root, text=v1.get()).grid(row=3)
+    # def get_e1_val():
+    #    Label(root, text=v1.get()).grid(row=3)
 
     def TK_decrypt():
         inp = v1.get()
@@ -97,7 +96,7 @@ if __name__ == '__main__':
             num = int(v2.get())
         except ValueError:
             res.set("""Witzig, bitte nutze eine Nicht komma zahl.\n
-             Naechstes Mal Bedienungsanleitung lesen!!""")
+                       Naechstes Mal Bedienungsanleitung lesen!!""")
             return
         except Exception as e:
             res.set("Etwas lief schief, bitte pruefe deine Eingabe")
