@@ -54,8 +54,7 @@ def encrypt(inp, num):
         while tempo > 26:
             tempo -= 26
         temp[i] = tempo
-    for i in temp:
-        pub += crypt[i]
+        pub += crypt[temp[i]]
     return pub.upper()
 
 
