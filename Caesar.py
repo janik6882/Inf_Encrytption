@@ -13,7 +13,6 @@ __status__ = "V0.2"
 from Tkinter import *
 import sys
 from sets import Set
-
 # Basic Global Vars (Dict with Letter and Value, reversed and a string with
 # all allowed charachters
 normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
@@ -38,11 +37,11 @@ def encrypt(inp, num):
         int(num)
     except ValueError:
         print ("RTFM. Please read the manual")
-        return "Fehler"
+        return "Fehler, keine Verarbeitung moeglich"
     inp = inp.lower()
     if not check_string(inp, allowed_chars):
         print ("RTFM. Please read the manual")
-        return "Fehler"
+        return "Fehler, keine Verarbeitung moeglich"
     # validity checks ended, creating temporary vars for use in function
     pub = str()  # pub is the resulting string which will be returned
     vals = list()  # temporary List for storing the values of every char
@@ -84,22 +83,24 @@ def decrypt(inp, num):
     Special: Uses encrypt() with negative integer for decryption. Further docu
             at encrypt()
     """
-    num -= 2*num
+    num -= 2*num  # changing + to - before int and other way around
     return encrypt(inp, num)
 
-
-if __name__ == '__main__':
+def main():
     # Set Gui to True if you want to use the Gui, set to False of not.
     # Startvars:
     Gui = True
 
-    # def get_e1_val():
-    #    Label(root, text=v1.get()).grid(row=3)
-
     def TK_decrypt():
-        inp = v1.get()
+        """
+        Comment: calls decrypt() and runs the decryption for the input
+        Input: Takes Input from TKinter Entry
+        Output: Output to Tkinter label
+        Special: Checks Input for validity
+        """
+        inp = v1.get()  # Gets current value for v1 entry widget
         try:
-            num = int(v2.get())
+            num = int(v2.get())  # checks if num is a number
         except ValueError:
             res.set("""Witzig, bitte nutze eine Nicht komma zahl.\n
                        Naechstes Mal Bedienungsanleitung lesen!!""")
@@ -112,6 +113,13 @@ if __name__ == '__main__':
         res.set(str(decrypted))
 
     def TK_encrypt():
+        """
+        Comment: calls encrypt() and encrypts input from TKinter entry widget
+        Input: takes input from Tktiner Entry
+        Output: Output to Tkinter Label
+        Special: Checks input for validity
+        """
+
         inp = v1.get()
         try:
             num = int(v2.get())
@@ -132,14 +140,22 @@ if __name__ == '__main__':
                           abbrechen(c):\n""")
         if test1 == "1":
             text1 = raw_input("ihr zu verschluesselnder text bitte:\n")
-            num1 = int(raw_input("ihre verschiebung bitte:\n"))
-            verschluesslt = "ihr verschluesselter text:\n{pub}"
-            print verschluesslt.format(pub=encrypt(text1, num1))
+            num1 = raw_input("ihre verschiebung bitte:\n")
+            try:
+                num1 = int(num1)
+                verschluesslt = "ihr verschluesselter text:\n{pub}"
+                print verschluesslt.format(pub=encrypt(text1, num1))
+            except ValueError:
+                print ("Fahlerhafte Eingabe, bitte erneut versuchen")
         elif test1 == "2":
             text2 = raw_input("ihr zu entschluesselnder text bitte:\n")
-            num2 = int(raw_input("ihre verschiebung bitte:\n"))
-            entschluesselt = "ihr entschluesselter text:\n{priv}"
-            print entschluesselt.format(priv=decrypt(text2, num2))
+            num2 = raw_input("ihre verschiebung bitte:\n")
+            try:
+                num2 = int(num2)
+                entschluesselt = "ihr entschluesselter text:\n{priv}"
+                print entschluesselt.format(priv=decrypt(text2, num2))
+            except ValueError:
+                print ("Fehlerhafte eingabe, bitte erneut versuchen")
         elif test1 == "c":
             sys.exit(0)
     if not laufend:
@@ -149,10 +165,19 @@ if __name__ == '__main__':
         res = StringVar()
         Label(root, text="input").grid(row=0)
         Label(root, text="verschiebung").grid(row=1, column=0)
-        e1 = Entry(root, textvariable=v1).grid(row=0, column=1)
-        e2 = Entry(root, textvariable=v2).grid(row=1, column=1)
-        b1 = Button(text="encrypt", command=TK_encrypt).grid(row=2, column=0)
-        b2 = Button(text="decrypt", command=TK_decrypt).grid(row=2, column=1)
+        Entry(root, textvariable=v1).grid(row=0, column=1)
+        Entry(root, textvariable=v2).grid(row=1, column=1)
+        Button(text="encrypt", command=TK_encrypt).grid(row=2, column=0)
+        Button(text="decrypt", command=TK_decrypt).grid(row=2, column=1)
         Label(root, text="Ergebnis: ").grid(row=3, column=0)
-        x = Label(root, textvariable=res).grid(row=3, column=1)
+        Label(root, textvariable=res).grid(row=3, column=1)
         root.mainloop()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
+    except Exception as e:
+        sys.exit()
