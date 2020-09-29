@@ -9,6 +9,7 @@ __maintainer__ = "Janik Klauenberg (https://github.com/janik6882)"
 __email__ = "support@klauenberg.eu"
 __status__ = "V0.2"
 
+# Tkinter for GUI, sys for exiting Program clean, sets for string check
 from Tkinter import *
 import sys
 from sets import Set
@@ -32,7 +33,7 @@ def encrypt(inp, num):
             Dont even think of using an non Integer Value as num!!
             Only use a/A-z/Z for the input string.
     """
-    # checking input for validity
+    # checking input for validity (num a int, inp a valid string)
     try:
         int(num)
     except ValueError:
@@ -44,16 +45,21 @@ def encrypt(inp, num):
         return "Fehler"
     # validity checks ended, creating temporary vars for use in function
     pub = str()  # pub is the resulting string which will be returned
-    temp = list()  # temporary List for storing the values of every char
+    vals = list()  # temporary List for storing the values of every char
     for i in inp:
-        temp.append(normal_alphabet[i])
-    for i in range(len(temp)):
-        tempo = temp[i]+num
-        while tempo <= 0:
-            tempo += 26
-        while tempo > 26:
-            tempo -= 26
-        pub += crypt[tempo]
+        # looping through input, adding the value for each Letter to temp
+        vals.append(normal_alphabet[i])
+    for i in range(len(vals)):
+        # Looping through vals, setting enc_val=vals[i]+num (encrypted Value)
+        enc_val = vals[i]+num
+        # Cleaning enc_val, correcting enc_val if bigger then 26 or smaller 0
+        while enc_val <= 0:
+            enc_val += 26
+        while enc_val > 26:
+            enc_val -= 26
+        # Cleaning done, adding the letter to pub
+        pub += crypt[enc_val]
+    # returning the upper case result of pub
     return pub.upper()
 
 
