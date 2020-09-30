@@ -29,9 +29,9 @@ def encrypt(enc_str, key_str):
     vals_key = list()
     # TBA replace dict with ord()/chr()
     for i in enc_str:
-        vals_enc.append(normal_alphabet[i])
+        vals_enc.append(ord(i))
     for i in key_str:
-        vals_key.append(normal_alphabet[i])
+        vals_key.append(ord(i))
     if len(vals_enc)>len(vals_key):
         vals_key = vals_key * int(round((len(vals_enc)/float(len(vals_key)))+0.49))
     for i in range(len(enc_str)):
@@ -42,7 +42,7 @@ def encrypt(enc_str, key_str):
             val+=26
         while val>26:
             val-=26
-        pub+=crypt[val]
+        pub+=chr(i)
     return pub
 
 def decrypt(dec_str, key_str):
@@ -53,9 +53,9 @@ def decrypt(dec_str, key_str):
     vals_dec = list()
     vals_key = list()
     for i in dec_str:
-        vals_dec.append(normal_alphabet[i])
+        vals_dec.append(ord(i))
     for i in key_str:
-        vals_key.append(normal_alphabet[i])
+        vals_key.append(ord(i))
     if len(vals_dec)>len(vals_key):
         vals_key = vals_key * int(round((len(vals_dec)/float(len(vals_key)))+0.49))
     for i in range(len(vals_dec)):
@@ -66,7 +66,8 @@ def decrypt(dec_str, key_str):
             val+=26
         while val>26:
             val-=26
-        pub+=crypt[val]
+        pub+=chr(i)
+        print i
     return pub
 
 def check_string(to_test, allowed):
