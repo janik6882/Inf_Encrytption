@@ -20,6 +20,7 @@ normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
 crypt = {y: x for x, y in normal_alphabet.iteritems()}
 allowed_chars = "abcdefghijklmnopqrstuvwxyz"
 
+
 def encrypt(enc_str, key_str):
     enc_str = enc_str.lower()
     key_str = key_str.lower()
@@ -65,10 +66,10 @@ def decrypt(dec_str, key_str):
     print vals_pub
     for i in range(len(vals_pub)):
         val = vals_pub[i]
-        #while val <= 0:
-        #    val+=26
-        #while val>26:
-        #    val-=26
+        while val <= 0:
+            val+=255
+        while val>255:
+            val-=255
         pub+=chr(i)
         print vals_pub
     return pub
@@ -86,6 +87,6 @@ def check_string(to_test, allowed):
         return False
 
 
-x = decrypt("abc", "ab")
+x = decrypt("abc", "a")
 
 print encrypt(x, "ab")

@@ -107,7 +107,7 @@ def main():
             return
         except Exception as e:
             res.set("Etwas lief schief, bitte pruefe deine Eingabe")
-            print e
+            print (e)
             return
         decrypted = decrypt(inp, num)
         res.set(str(decrypted))
@@ -129,7 +129,7 @@ def main():
             return
         except Exception as e:
             res.set("Etwas lief schief, bitte pruefe deine Eingabe")
-            print e
+            print (e)
             return
         encrypted = encrypt(inp, num)
         res.set(str(encrypted))
