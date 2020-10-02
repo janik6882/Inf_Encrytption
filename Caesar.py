@@ -7,7 +7,7 @@ __license__ = "None"
 __version__ = "0.9"
 __maintainer__ = "Janik Klauenberg (https://github.com/janik6882)"
 __email__ = "support@klauenberg.eu"
-__status__ = "V0.2"
+__status__ = "working on it"
 
 # Tkinter for GUI, sys for exiting Program clean, sets for string check
 import sys
@@ -16,7 +16,7 @@ import sys
 py_ver = sys.version_info
 if py_ver[0]==2:
     from Tkinter import *
-    from sets import Set
+    # from sets import Set
 else:
     from tkinter import *
 normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
