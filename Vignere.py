@@ -10,7 +10,7 @@ __email__ = "support@klauenberg.eu"
 __status__ = "V0.2"
 
 import sys
-from sets import Set
+#from sets import Set
 
 
 normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
@@ -28,10 +28,9 @@ normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
 #                   "-": 69, "_": 70,
 #                   "ö": 39, "ä": 40, "ü": 41
                    }
-crypt = {y: x for x, y in normal_alphabet.iteritems()}
+crypt = {y: x for x, y in normal_alphabet.items()}
 allowed_chars = "".join(list(normal_alphabet.keys()))
 len_alpphabet = len(normal_alphabet)
-print len_alpphabet
 
 def encrypt(enc_str, key_str):
     enc_str = enc_str.lower()
@@ -49,14 +48,12 @@ def encrypt(enc_str, key_str):
         vals_key = vals_key * int(round((len(vals_enc)/float(len(vals_key)))+0.49))
     for i in range(len(enc_str)):
         vals_pub.append(int(vals_key[i]+vals_enc[i]))
-    print vals_pub
     for i in range(len(vals_pub)):
         val = vals_pub[i]
         while val <= 0:
             val += len_alpphabet
         while val > len_alpphabet:
             val -= len_alpphabet
-        print crypt[val]
         pub += crypt[val]
     return pub
 
@@ -93,7 +90,7 @@ def check_string(to_test, allowed):
     Output: Bool
     Special: Nothing special
     """
-    if Set(to_test).issubset(Set(allowed)):
+    if set(to_test).issubset(set(allowed)):
         return True
     else:
         return False
@@ -101,4 +98,4 @@ def check_string(to_test, allowed):
 
 print (decrypt("xyz", "ab"))
 x = encrypt("xyz", "ab")
-print decrypt(x, "ab")
+print (decrypt(x, "ab"))
