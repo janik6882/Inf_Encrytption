@@ -143,7 +143,7 @@ def main():
         global res
         res = StringVar()
         Label(root, text="input").grid(row=0)
-        Label(root, text="verschiebung").grid(row=1, column=0)
+        Label(root, text="Schluessel").grid(row=1, column=0)
         Entry(root, textvariable=v1).grid(row=0, column=1)
         Entry(root, textvariable=v2).grid(row=1, column=1)
         Button(text="encrypt", command=TK_encrypt).grid(row=2, column=0)

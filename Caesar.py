@@ -90,6 +90,7 @@ def decrypt(inp, num):
     num -= 2*num  # changing + to - before int and other way around
     return encrypt(inp, num)
 
+
 def main():
     # Set Gui to True if you want to use the Gui, set to False of not.
     # Startvars:
