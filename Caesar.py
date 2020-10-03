@@ -78,7 +78,7 @@ def check_string(to_test, allowed):
     else:
         return False
 
-# test
+
 def decrypt(inp, num):
     """
     Comment: decrypts a String(inp) using the caear algorithm
