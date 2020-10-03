@@ -10,7 +10,6 @@ __email__ = "support@klauenberg.eu"
 __status__ = "V0.2"
 
 import sys
-#from sets import Set
 py_ver = sys.version_info
 if py_ver[0]==2:
     from Tkinter import *
@@ -36,6 +35,7 @@ normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
 crypt = {y: x for x, y in normal_alphabet.items()}
 allowed_chars = "".join(list(normal_alphabet.keys()))
 len_alpphabet = len(normal_alphabet)
+
 
 def encrypt(enc_str, key_str):
     enc_str = enc_str.lower()
@@ -104,6 +104,7 @@ def check_string(to_test, allowed):
     else:
         return False
 
+
 def TK_decrypt():
     """
     Comment: calls decrypt() and runs the decryption for the input
@@ -115,6 +116,8 @@ def TK_decrypt():
     key = v2.get() # checks if num is a number
     decrypted = decrypt(inp, key)
     res.set(str(decrypted))
+
+
 def TK_encrypt():
     """
     Comment: calls encrypt() and encrypts input from TKinter entry widget
