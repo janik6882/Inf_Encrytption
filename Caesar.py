@@ -7,19 +7,23 @@ __license__ = "None"
 __version__ = "0.9"
 __maintainer__ = "Janik Klauenberg (https://github.com/janik6882)"
 __email__ = "support@klauenberg.eu"
-__status__ = "V0.2"
+__status__ = "working on it"
 
 # Tkinter for GUI, sys for exiting Program clean, sets for string check
-from Tkinter import *
 import sys
-from sets import Set
 # Basic Global Vars (Dict with Letter and Value, reversed and a string with
 # all allowed charachters
+py_ver = sys.version_info
+if py_ver[0]==2:
+    from Tkinter import *
+    # from sets import Set
+else:
+    from tkinter import *
 normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
                    "h": 8, "i": 9, "j": 10, "k": 11, "l": 12, "m": 13, "n": 14,
                    "o": 15, "p": 16, "q": 17, "r": 18, "s": 19, "t": 20,
                    "u": 21, "v": 22, "w": 23, "x": 24, "y": 25, "z": 26}
-crypt = {y: x for x, y in normal_alphabet.iteritems()}
+crypt = {y: x for x, y in normal_alphabet.items()}
 allowed_chars = "abcdefghijklmnopqrstuvwxyz"
 
 
@@ -69,7 +73,7 @@ def check_string(to_test, allowed):
     Output: Bool
     Special: Nothing special
     """
-    if Set(to_test).issubset(Set(allowed)):
+    if set(to_test).issubset(set(allowed)):
         return True
     else:
         return False
@@ -144,7 +148,7 @@ def main():
             try:
                 num1 = int(num1)
                 verschluesslt = "ihr verschluesselter text:\n{pub}"
-                print verschluesslt.format(pub=encrypt(text1, num1))
+                print (verschluesslt.format(pub=encrypt(text1, num1)))
             except ValueError:
                 print ("Fahlerhafte Eingabe, bitte erneut versuchen")
         elif test1 == "2":
@@ -153,7 +157,7 @@ def main():
             try:
                 num2 = int(num2)
                 entschluesselt = "ihr entschluesselter text:\n{priv}"
-                print entschluesselt.format(priv=decrypt(text2, num2))
+                print (entschluesselt.format(priv=decrypt(text2, num2)))
             except ValueError:
                 print ("Fehlerhafte eingabe, bitte erneut versuchen")
         elif test1 == "c":
