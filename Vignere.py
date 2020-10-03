@@ -51,7 +51,7 @@ def encrypt(enc_str, key_str):
         vals_enc.append(normal_alphabet[i])
     for i in key_str:
         vals_key.append(normal_alphabet[i])
-    if len(vals_enc)>len(vals_key):
+    if len(vals_enc) > len(vals_key):
         vals_key = vals_key * int(round((len(vals_enc)/float(len(vals_key)))+0.49))
     for i in range(len(enc_str)):
         vals_pub.append(int(vals_key[i]+vals_enc[i]))
