@@ -10,25 +10,15 @@ __email__ = "support@klauenberg.eu"
 __status__ = "V0.2"
 
 import sys
-<<<<<<< HEAD
-
-=======
 #from sets import Set
 py_ver = sys.version_info
 if py_ver[0]==2:
     from Tkinter import *
 else:
     from tkinter import *
->>>>>>> master
-
 normal_alphabet = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
                    "h": 8, "i": 9, "j": 10, "k": 11, "l": 12, "m": 13, "n": 14,
                    "o": 15, "p": 16, "q": 17, "r": 18, "s": 19, "t": 20,
-<<<<<<< HEAD
-                   "u": 21, "v": 22, "w": 23, "x": 24, "y": 25, "z": 26}
-crypt = {y: x for x, y in normal_alphabet.items()}
-allowed_chars = "abcdefghijklmnopqrstuvwxyz"
-=======
                    "u": 21, "v": 22, "w": 23, "x": 24, "y": 25, "z": 26,
                    " ": 27, "1": 28, "2": 29, "3": 30, "4": 31, "5": 32,
                    "6": 33, "7": 34, "8": 35, "9": 36,
@@ -43,9 +33,10 @@ allowed_chars = "abcdefghijklmnopqrstuvwxyz"
 #                   "ö": 39, "ä": 40, "ü": 41
                    }
 crypt = {y: x for x, y in normal_alphabet.items()}
+allowed_chars = "abcdefghijklmnopqrstuvwxyz"
+crypt = {y: x for x, y in normal_alphabet.items()}
 allowed_chars = "".join(list(normal_alphabet.keys()))
 len_alpphabet = len(normal_alphabet)
->>>>>>> master
 
 
 def encrypt(enc_str, key_str):
@@ -87,15 +78,12 @@ def decrypt(dec_str, key_str):
     vals_key = list()
     for i in dec_str:
         vals_dec.append(ord(i))
-        print ord(i)
     for i in key_str:
         vals_key.append(ord(i))
-        print vals_key
     if len(vals_dec)>len(vals_key):
         vals_key = vals_key * int(round((len(vals_dec)/float(len(vals_key)))+0.49))
     for i in range(len(vals_dec)):
         vals_pub.append(int(vals_dec[i]-vals_key[i]))
-    print vals_pub
     for i in range(len(vals_pub)):
         val = vals_pub[i]
         while val <= 0:
@@ -103,7 +91,6 @@ def decrypt(dec_str, key_str):
         while val>255:
             val-=255
         pub+=chr(i)
-        print vals_pub
     return pub
 
 def check_string(to_test, allowed):
@@ -140,7 +127,7 @@ def TK_encrypt():
     inp = v1.get()
     key = v2.get()
     encrypted = encrypt(inp, key)
-    res.set(encrypted)
+    res.set(str(encrypted))
 
 def main():
     Gui  = True
@@ -166,12 +153,10 @@ def main():
     x = encrypt("xyz", "ab")
     print (decrypt(x, "ab"))
 
-<<<<<<< HEAD
-x = decrypt("abc", "a")
+#x = decrypt("abc", "a")
 
-print encrypt(x, "ab")
-=======
+#print encrypt(x, "ab")
+
 
 if __name__ == '__main__':
     main()
->>>>>>> master
